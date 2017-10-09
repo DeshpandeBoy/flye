@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import List from "list.js";
 
 class App extends Component {
   constructor() {
@@ -8,13 +8,14 @@ class App extends Component {
       data: [],
       name: "",
       filteredList: [],
-      selectValue: true
+      selectValue: "BANGALORE"
     };
   }
 
   componentDidMount() {
     fetch(
-      "https://app.fyle.in/api/bank_branches?city=BANGALORE&offset=0&limit=50"
+      `https://app.fyle.in/api/bank_branches?city=${this.state
+        .selectValue}&offset=0&limit=10`
     )
       .then(result => result.json())
       .then(data => this.setState({ data }));
@@ -38,7 +39,12 @@ class App extends Component {
   }
   _handleSelection(e) {
     this.setState({ selectValue: e.target.value });
-    console.log(this.state.selectValue);
+    fetch(
+      `https://app.fyle.in/api/bank_branches?city=${this.state
+        .selectValue}&offset=0&limit=10`
+    )
+      .then(result => result.json())
+      .then(data => this.setState({ data }));
   }
 
   render() {
@@ -46,15 +52,15 @@ class App extends Component {
       <div className="container">
         <div id="dropdown">
           <select onChange={e => this._handleSelection(e)}>
-            <option value="Banglore">Banglore</option>
-            <option value="Delhi">Delhi</option>
-            <option value="Mumbai">Mumbai</option>
+            <option value="BANGLORE">Banglore</option>
+            <option value="DELHI">Delhi</option>
+            <option value="MUMBAI">Mumbai</option>
           </select>
           <div id="search">
             <input onChange={e => this._handleChange(e)} />
             <h3>Type bank name to searched</h3>
           </div>
-          <div id="table">
+          <div id="table test-list">
             <table className="table-striped table-hover" id="example">
               <tr className="thead-inverse">
                 <th>IFSC</th>
@@ -68,7 +74,7 @@ class App extends Component {
               <tbody>
                 {this.state.name.length !== 0
                   ? this.state.filteredList.map((bank, i) => (
-                      <tr key={i}>
+                      <tr key={i} className="pageit">
                         <td>{bank.ifsc}</td>
                         <td>{bank.bank_name}</td>
                         <td>{bank.branch}</td>
