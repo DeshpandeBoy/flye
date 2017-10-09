@@ -14,7 +14,7 @@ class App extends Component {
   componentDidMount() {
     fetch(
       `https://app.fyle.in/api/bank_branches?city=${this.state
-        .selectValue}&offset=0&limit=10`
+        .selectValue}&offset=0&limit=25`
     )
       .then(result => result.json())
       .then(data => this.setState({ data }));
@@ -39,7 +39,7 @@ class App extends Component {
   _handleSelection(e) {
     let selectValue = e.target.value
     fetch(
-      `https://app.fyle.in/api/bank_branches?city=${selectValue}&offset=0&limit=10`
+      `https://app.fyle.in/api/bank_branches?city=${selectValue}&offset=0&limit=25`
     )
       .then(result => result.json())
       .then(data => this.setState({ data }));
