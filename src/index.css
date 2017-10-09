@@ -1,0 +1,25 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+img {
+  position: relative;
+  top: 200px;
+  width: 500px;
+  height: 400px;
+}
+
+h1 {
+  text-align: center;
+  position: relative;
+  top: 50px;
+}
+
+#text {
+  display: flex;
+  color: white;
+  position: relative;
+}
+
