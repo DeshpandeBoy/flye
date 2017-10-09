@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import List from "list.js";
 
 class App extends Component {
   constructor() {
@@ -38,13 +37,13 @@ class App extends Component {
     }
   }
   _handleSelection(e) {
-    this.setState({ selectValue: e.target.value });
+    let selectValue = e.target.value
     fetch(
-      `https://app.fyle.in/api/bank_branches?city=${this.state
-        .selectValue}&offset=0&limit=10`
+      `https://app.fyle.in/api/bank_branches?city=${selectValue}&offset=0&limit=10`
     )
       .then(result => result.json())
       .then(data => this.setState({ data }));
+    this.setState({selectValue})
   }
 
   render() {
